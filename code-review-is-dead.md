@@ -10,9 +10,7 @@ Can't tell if your LLM has gone completely wild?
 
 Clean Architecture, Hexagonal Architecture, endless interfaces, DTOs, services...
 
-These patterns were designed with human developers in mind. But when an LLM writes and maintains the code, do we really need all that complexity?
-
-Could we simply do this instead: 
+These patterns help people work on complex systems. When an LLM writes and maintains the code, which parts still earn their keep?
 
 - **Keep separation of concerns. Drop unnecessary complexity.**
 - **Ask your LLM to minimize code without sacrificing clarity or reliability.**
@@ -20,11 +18,11 @@ Could we simply do this instead:
 
 ### 2. 📦 Think Modules, Not Layers
 
-A simpler approach is to organize software into self-contained modules, each with:
+Organize the code into self-contained modules. Give each one:
 
 - A clear responsibility and public APIs defined using OpenAPI.
 - Explicit contracts and business rules.
-- Their own integration tests, written in human-readable language and included in the specifications.
+- Integration tests described in plain language in the spec.
 
 Each module should be easy to find, understand, and modify without loading the entire codebase into the LLM's context.
 
@@ -62,7 +60,7 @@ The good news is that **AI Spec-Driven Development** can now go further, reducin
 
 **The future of code review isn't reading more AI-generated code. It's building systems where we don't have to.**
 
-But of course, if you still plan to code manually, keep the job done with a clean architecture and other human practice.
+If you write the code by hand, choose an architecture your team can follow.
 
 \#AI #SoftwareArchitecture #SpecDrivenDevelopment #LLM #SoftwareEngineering #AIAgents #Rust #GoLang
 
