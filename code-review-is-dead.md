@@ -12,6 +12,8 @@ Clean Architecture, Hexagonal Architecture, endless interfaces, DTOs, services..
 
 These patterns were designed with human developers in mind. But when an LLM writes and maintains the code, do we really need all that complexity?
 
+Could we simply do this instead: 
+
 - **Keep separation of concerns. Drop unnecessary complexity.**
 - **Ask your LLM to minimize code without sacrificing clarity or reliability.**
 - **Fewer layers, fewer abstractions, less structural and code redundancy.**
@@ -60,4 +62,11 @@ The good news is that **AI Spec-Driven Development** can now go further, reducin
 
 **The future of code review isn't reading more AI-generated code. It's building systems where we don't have to.**
 
+But of course, if you still plan to code manually, keep the job done with a clean architecture and other human practice.
+
 \#AI #SoftwareArchitecture #SpecDrivenDevelopment #LLM #SoftwareEngineering #AIAgents #Rust #GoLang
+
+### Inside the Go example
+
+- [Integration test report](IT_reports.md) — see what the 14 passing scenarios verified about the Yahoo Finance API.
+- [File dependency diagram](file-dependencies.png) — see which files depend on each other and how many direct dependencies each has.
