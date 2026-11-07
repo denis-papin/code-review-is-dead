@@ -1,0 +1,15 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Market Data",
+    "version": "0.2.0"
+  },
+  "paths": {
+    "/v1/markets/us/top-gainers": {
+      "$ref": "../_ai/openapi.json#/paths/~1v1~1markets~1us~1top-gainers"
+    },
+    "/v1/history/{symbol}": {
+      "$ref": "../_ai/openapi.json#/paths/~1v1~1history~1%7Bsymbol%7D"
+    }
+  }
+}

@@ -1,0 +1,221 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Market Data",
+    "version": "0.2.0"
+  },
+  "paths": {
+    "/v1/markets/us/top-gainers": {
+      "get": {
+        "operationId": "getTopGainers",
+        "summary": "Latest five gainers from Yahoo’s US Day Gainers screener",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Gainers"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "Yahoo returned an unusable response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Yahoo rate limit or timeout",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-acceptance-cases": [
+          "G1",
+          "G2",
+          "G3",
+          "G4",
+          "G5",
+          "E1",
+          "E2",
+          "F1"
+        ]
+      }
+    },
+    "/v1/history/{symbol}": {
+      "get": {
+        "operationId": "getHistory",
+        "summary": "One month of daily unadjusted closing prices",
+        "parameters": [
+          {
+            "name": "symbol",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9^][A-Za-z0-9.^=-]{0,19}$"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/History"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid symbol syntax",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Yahoo reports an unknown symbol",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "Yahoo returned an unusable response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Yahoo rate limit or timeout",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-acceptance-cases": [
+          "H1",
+          "H2",
+          "H3",
+          "H4",
+          "H5",
+          "H6",
+          "E1",
+          "E2",
+          "F1"
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "History": {
+        "type": "object",
+        "required": [
+          "symbol",
+          "currency",
+          "samples"
+        ],
+        "properties": {
+          "symbol": {
+            "type": "string"
+          },
+          "currency": {
+            "type": "string"
+          },
+          "samples": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "at",
+                "close"
+              ],
+              "properties": {
+                "at": {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "close": {
+                  "type": "number"
+                }
+              }
+            }
+          }
+        }
+      },
+      "Error": {
+        "type": "object",
+        "required": [
+          "error"
+        ],
+        "properties": {
+          "error": {
+            "type": "string"
+          }
+        }
+      },
+      "Gainers": {
+        "type": "object",
+        "required": [
+          "gainers"
+        ],
+        "properties": {
+          "gainers": {
+            "type": "array",
+            "maxItems": 5,
+            "items": {
+              "type": "object",
+              "required": [
+                "symbol",
+                "changePercent",
+                "asOf"
+              ],
+              "properties": {
+                "symbol": {
+                  "type": "string",
+                  "pattern": "^[A-Za-z0-9^][A-Za-z0-9.^=-]{0,19}$"
+                },
+                "changePercent": {
+                  "type": "number",
+                  "exclusiveMinimum": 0
+                },
+                "asOf": {
+                  "type": "string",
+                  "format": "date-time"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
